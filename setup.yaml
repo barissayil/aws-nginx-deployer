@@ -1,0 +1,24 @@
+- hosts: all
+  become: yes
+  tasks:
+    - name: Install Nginx
+      apt:
+        name: nginx
+        state: latest
+        update_cache: yes
+
+    - name: Ensure Nginx is running
+      systemd:
+        name: nginx
+        state: started
+        enabled: yes
+
+    - name: Copy HTML
+      copy:
+        src: ./index.html
+        dest: /var/www/html/index.html
+
+    - name: Copy CSS
+      copy:
+        src: ./styles.css
+        dest: /var/www/html/styles.css
