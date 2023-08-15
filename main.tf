@@ -1,8 +1,3 @@
-locals {
-  key_name = "aws-ec2-kp-0"
-  key_path = "~/.secrets/aws-ec2-kp-0.pem"
-}
-
 provider "aws" {
   region = "us-east-1"
 }
@@ -40,12 +35,16 @@ module "security_group" {
   vpc_id = module.vpc.vpc_id
 }
 
+module "private_key" {
+  source = "./private_key"
+}
+
 module "instance" {
   source                 = "./instance"
   subnet_id              = module.subnet.subnet_id
   vpc_security_group_ids = [module.security_group.sg_id]
-  key_name               = local.key_name
-  key_path               = local.key_path
+  key_name               = module.private_key.key_name
+  key_path               = module.private_key.key_path
 }
 
 output "public_ip" {

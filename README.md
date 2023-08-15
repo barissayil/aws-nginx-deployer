@@ -4,14 +4,12 @@ This project uses Terraform and Ansible to provision and configure an AWS enviro
 
 ## Usage
 
-1. Ensure that Terraform and Ansible are installed on your local machine, you have the necessary AWS credentials set up, and you have an available AWS Key Pair.
+1. Ensure that Terraform and Ansible are installed on your local machine, and you have the necessary AWS credentials set up.
 
-2. Update the `key_name` and `key_path` in `main.tf` to match your AWS Key Pair.
+2. Run `terraform init` to initialize your Terraform workspace.
 
-3. Run `terraform init` to initialize your Terraform workspace.
+3. Run `terraform apply` to create the AWS resources.
 
-4. Run `terraform apply` to create the AWS resources.
-
-5. Once the resources have been created, Terraform will output the public IP of the EC2 instance. You can access the webpage by navigating to `http://<public-ip>` in a web browser.
+4. Once the resources have been created, Terraform will output the public IP of the EC2 instance. You can access the webpage by navigating to `http://<public-ip>` in a web browser.
 
 **Note:** Remember to run `terraform destroy` when you're done to delete the resources and avoid unnecessary AWS charges.
