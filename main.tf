@@ -8,7 +8,7 @@ provider "aws" {
 }
 
 module "vpc" {
-  source = "./vpc"
+  source     = "./vpc"
   cidr_block = "10.0.0.0/16"
 }
 
@@ -18,8 +18,8 @@ module "internet_gateway" {
 }
 
 module "subnet" {
-  source = "./subnet"
-  vpc_id = module.vpc.vpc_id
+  source     = "./subnet"
+  vpc_id     = module.vpc.vpc_id
   cidr_block = "10.0.0.0/24"
 }
 
@@ -30,8 +30,8 @@ module "route_table" {
 }
 
 module "route_table_association" {
-  source = "./route_table_association"
-  subnet_id = module.subnet.subnet_id
+  source         = "./route_table_association"
+  subnet_id      = module.subnet.subnet_id
   route_table_id = module.route_table.route_table_id
 }
 
@@ -41,11 +41,11 @@ module "security_group" {
 }
 
 module "instance" {
-  source = "./instance"
-  subnet_id = module.subnet.subnet_id
+  source                 = "./instance"
+  subnet_id              = module.subnet.subnet_id
   vpc_security_group_ids = [module.security_group.sg_id]
-  key_name = local.key_name
-  key_path = local.key_path
+  key_name               = local.key_name
+  key_path               = local.key_path
 }
 
 output "public_ip" {
